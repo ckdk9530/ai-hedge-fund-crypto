@@ -2,7 +2,7 @@ import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 from dotenv import load_dotenv
-from src.utils import settings
+from src.utils import settings, BinanceTradingClient
 from datetime import datetime
 from src.agent import Agent
 from src.backtest.backtester import Backtester
@@ -68,5 +68,18 @@ if __name__ == "__main__":
             model_provider=settings.model.provider,
             model_base_url=settings.model.base_url
         )
-        # print(result)
-        print(result.get('decisions'))
+        decisions = result.get('decisions', {})
+        print(decisions)
+
+        trader = BinanceTradingClient()
+        for symbol, info in decisions.items():
+            action = info.get('action')
+            qty = info.get('quantity', 0)
+            if qty and action in {'buy', 'sell'}:
+                side = 'BUY' if action == 'buy' else 'SELL'
+                try:
+                    resp = trader.create_order(symbol=symbol, side=side, quantity=qty)
+                    print(f"Placed {action} order for {symbol}: {resp}")
+                except Exception as e:
+                    print(f"Error placing order for {symbol}: {e}")
+
