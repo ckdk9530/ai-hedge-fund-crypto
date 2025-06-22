@@ -2,6 +2,7 @@ from typing import List
 from langgraph.graph import END, StateGraph
 from graph import AgentState, StartNode, DataNode, EmptyNode, RiskManagementNode, PortfolioManagementNode
 from utils import import_strategy_class, Interval
+from utils.util_func import camel_to_snake
 
 
 class Workflow:
@@ -24,7 +25,10 @@ class Workflow:
             workflow.add_edge(node_name, "merge_data_node")
 
         for strategy_node_name in strategies:
-            strategy_class = import_strategy_class(f"src.strategies.{strategy_node_name}")
+            module_name = camel_to_snake(strategy_node_name)
+            strategy_class = import_strategy_class(
+                f"src.strategies.{module_name}.{strategy_node_name}"
+            )
             strategy_instance = strategy_class()
             workflow.add_node(strategy_node_name, strategy_instance)
             workflow.add_edge("merge_data_node", strategy_node_name)
