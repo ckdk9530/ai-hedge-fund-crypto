@@ -488,6 +488,10 @@ ai-hedge-fund-crypto/
 - **src/indicators/**：策略使用的技术指标
 - **src/llm/**：用于决策制定的语言模型集成
 
+## 运行测试
+
+在项目根目录执行 `pytest` 即可运行单元测试。
+
 ## 贡献
 1. Fork仓库
 2. 创建功能分支

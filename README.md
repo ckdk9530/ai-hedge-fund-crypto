@@ -518,6 +518,10 @@ Key Files and Directories:
 - **src/indicators/**: Technical indicators used by strategies
 - **src/llm/**: Language model integration for decision making
 
+## Running Tests
+
+Run `pytest` from the project root to execute the unit tests.
+
 ## Contributing
 1. Fork the repository
 2. Create a feature branch
