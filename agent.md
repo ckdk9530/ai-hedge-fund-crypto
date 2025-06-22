@@ -14,3 +14,9 @@
 
 ## 對話規範
 - 所有與開發者的對話回應應使用簡體中文。
+
+## BINACNE API
+- API密钥
+1d1DpAVtc66gSvEQ7zq24kM1obDIRwD42Fqk2AtaT2MfYzPoEfu35NJV0wJEmtds
+- 密钥:
+8orw6ggjB7bdS3CDkRLfQBqh2s5AhDvjP2v1QOxlbZdqApFxauEKWZuEvIdNSCK6
