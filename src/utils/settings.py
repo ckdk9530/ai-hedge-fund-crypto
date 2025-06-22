@@ -3,10 +3,10 @@ from pydantic import model_validator, BaseModel
 from datetime import datetime
 import yaml
 from typing import List, Optional
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 from .constants import Interval
 
-load_dotenv()
+load_dotenv(find_dotenv())
 
 
 class SignalSettings(BaseModel):
