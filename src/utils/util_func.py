@@ -1,5 +1,6 @@
 import os
 import importlib
+import re
 from langgraph.graph.state import CompiledGraph
 from langchain_core.runnables.graph import MermaidDrawMethod
 from typing import Dict, Any
@@ -16,6 +17,14 @@ def import_strategy_class(strategies_path: str):
     module_path, class_name = strategies_path.rsplit('.', 1)
     module = importlib.import_module(module_path)
     return getattr(module, class_name)
+
+
+def camel_to_snake(name: str) -> str:
+    """Convert CamelCase string to snake_case."""
+    if not name:
+        return name
+    s1 = re.sub(r"(.)([A-Z][a-z]+)", r"\1_\2", name)
+    return re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", s1).lower()
 
 
 def save_graph_as_png(app: CompiledGraph, output_file_path) -> None:
