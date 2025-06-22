@@ -176,9 +176,9 @@ If you have more questions, feel free to check out the [uv documentation](https:
 cp config.example.yaml config.yaml
 ```
 
-4. Set up environment variables:
+4. Set up environment variables (create `.env` if it doesn't exist):
 ```bash
-cp .env.example .env
+touch .env
 ```
 
 5. Add your API keys to the `.env` file:
