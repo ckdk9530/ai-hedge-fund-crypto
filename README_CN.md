@@ -168,9 +168,9 @@ uv pip sync
 cp config.example.yaml config.yaml
 ```
 
-4. 设置环境变量：
+4. 设置环境变量（若不存在请创建 `.env` 文件）：
 ```bash
-cp .env.example .env
+touch .env
 ```
 
 5. 在`.env`文件中添加API密钥：
