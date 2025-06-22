@@ -293,10 +293,10 @@ BINANCE_API_SECRET=your-binance-api-secret
 ```bash
 uv run main.py
 ```
-## Real Trading Integration (Planned)
-The system is designed to support real trading through a Binance gateway client, which can send live orders based on strategy-generated signals. The gateway module extends the functionality of the python-binance library with features optimized for algorithmic trading.
+## Real Trading Integration
+Real trading is supported through a lightweight Binance gateway client that wraps the `python-binance` library.  The new `BinanceTradingClient` provides convenience methods for creating and cancelling orders using your API credentials.
 
-While full trading execution is not yet implemented, the current setup focuses on generating structured trading signals. These signals can later be converted into actual orders as part of a future enhancement.
+When running in `live` mode the system can automatically place market orders on Binance based on the portfolio manager's decisions.
 
 Here's an example of how to run the agent and retrieve signals:
 ```python
