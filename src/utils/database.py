@@ -3,14 +3,25 @@
 import os
 from pathlib import Path
 from typing import Iterable
+from dotenv import load_dotenv, find_dotenv
 
 import psycopg2
 from psycopg2.extras import RealDictCursor, execute_batch
 
+load_dotenv(find_dotenv())
+
 
 SCHEMA_PATH = Path("init.sql")
+
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "postgres")
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "5432")
+DB_NAME = os.getenv("DB_NAME", "trading")
+
 DEFAULT_DSN = os.getenv(
-    "DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/trading"
+    "DATABASE_URL",
+    f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}",
 )
 
 

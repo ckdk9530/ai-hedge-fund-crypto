@@ -315,10 +315,21 @@ print(result)
 
 运行方式：
 ```bash
-uv run full_market_collector.py
+ uv run full_market_collector.py
 ```
 
 脚本默认抓取 `Interval` 枚举中定义的全部时间框架，并每隔一段时间轮询更新，适合长期后台运行。
+
+### 数据库检查与初始化
+
+`db_manager.py` 脚本用于检查数据库表结构是否完整，如有缺失会自动创建或补充字段。运行前请在 `.env` 中设置 `DB_USER`、`DB_PASSWORD` 等数据库参数。
+
+运行方式：
+```bash
+uv run db_manager.py
+```
+
+脚本会读取 `init.sql` 中的定义检查当前数据库，并在需要时执行 `ALTER TABLE` 或创建表。
 
 ## 创建自定义策略
 
