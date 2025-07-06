@@ -1,9 +1,8 @@
 import os
 import importlib
 import re
-from langgraph.graph.state import CompiledGraph
-from langchain_core.runnables.graph import MermaidDrawMethod
 from typing import Dict, Any
+from langchain_core.runnables.graph import MermaidDrawMethod
 from colorama import Fore, Style
 from tabulate import tabulate
 import orjson
@@ -27,7 +26,16 @@ def camel_to_snake(name: str) -> str:
     return re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", s1).lower()
 
 
-def save_graph_as_png(app: CompiledGraph, output_file_path) -> None:
+def save_graph_as_png(app, output_file_path) -> None:
+    """Save a CompiledGraph visualization as PNG."""
+    try:
+        from langgraph.graph.state import CompiledGraph
+    except Exception:  # pragma: no cover - optional dependency
+        CompiledGraph = None
+
+    if CompiledGraph is None or not isinstance(app, CompiledGraph):
+        raise ValueError("app must be a CompiledGraph")
+
     png_image = app.get_graph().draw_mermaid_png(draw_method=MermaidDrawMethod.API)
     file_path = output_file_path if len(output_file_path) > 0 else "graph.png"
     with open(file_path, "wb") as f:
